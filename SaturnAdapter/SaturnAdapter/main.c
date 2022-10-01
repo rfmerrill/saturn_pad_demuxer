@@ -8,6 +8,7 @@
 #include <avr/io.h>
 
 // CKSEL fuse 0100 for internal 8MHz osc
+// Remove CKDIV8 for full 8 MHz
 // program RSTDISBL fuse
 
 // Port A
