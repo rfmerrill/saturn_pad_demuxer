@@ -71,13 +71,15 @@ int main(void)
     waitForTimer();
     while (1)
     {
-        // 00 - ZYXR
-        PORTB &= ~(_BV(PB4) | _BV(PB5));
+        // 11 - Handshake
+        // We don't read anything here, but it may be required for
+        // certain controllers to work right (e.g. MC Cthulhu)
+
+        PORTB |= _BV(PB4) | _BV(PB5);
         waitForTimer();
-        reads[0] = PINB;
 
         // 01 - UDLR
-        PORTB |= _BV(PB4);
+        PORTB &= ~_BV(PB5);
         waitForTimer();
         reads[1] = PINB;
 
@@ -156,6 +158,11 @@ int main(void)
         PORTB |= _BV(PB5);
         waitForTimer();
         reads[2] = PINB;
+
+        // 00 - ZYXR
+        PORTB &= ~(_BV(PB4) | _BV(PB5));
+        waitForTimer();
+        reads[0] = PINB;
 
         // Port A
         // 0 - X output
